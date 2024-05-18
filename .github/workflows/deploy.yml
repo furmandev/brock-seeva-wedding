@@ -35,5 +35,5 @@ jobs:
             - name: Build
               run: pnpm build
             - name: publish to branch
-              run: gh-pages -d dist"
+              run: gh-pages -d dist
 
