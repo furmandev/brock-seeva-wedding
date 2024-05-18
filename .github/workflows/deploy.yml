@@ -23,8 +23,6 @@ concurrency:
 jobs:
     deploy:
         runs-on: ubuntu-latest
-        permissions:
-            contents: write
         steps:
             - name: Checkout
               uses: actions/checkout@v4
@@ -36,8 +34,10 @@ jobs:
               run: pnpm install
             - name: Build
               run: pnpm build
-            - name: publish to branch
-              uses: peaceiris/actions-gh-pages@v4
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v3
               with:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-                  publish_dir: ./dist
+                  path: "dist"
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4
